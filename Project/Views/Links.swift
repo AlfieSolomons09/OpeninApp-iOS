@@ -58,6 +58,17 @@ struct Links: View {
             })
             .padding(.horizontal)
         }
+        
+        if(link == "Top Links"){
+            ForEach(0..<5){_ in
+                LinkDataBoxView(imageLink: "https://www.youtube.com/img/desktop/yt_1200.png")
+            }
+        }
+        else{
+            ForEach(0..<5){_ in
+                LinkDataBoxView()
+            }
+        }
     }
 }
 

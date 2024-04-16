@@ -11,7 +11,9 @@ import Foundation
 import Combine
 import UIKit
 
+
 struct ContentView: View {
+//    @ObservedObject var homeVM = HomeViewModel.shared
     @State var name: String = "Ajay Manva"
     @State private var selectedTab = 0
     var body: some View {
@@ -61,22 +63,11 @@ struct ContentView: View {
                         ViewAnalytics()
                         
                         Links()
+                        
+                        FAQS()
                     }
                 }
                 .padding(.bottom,10)
-                
-//                HStack{
-//                    Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
-//                        /*@START_MENU_TOKEN@*/Text("Button")/*@END_MENU_TOKEN@*/
-//                            .foregroundStyle(Color.black)
-//                    })
-//                }
-                
-            }
-        }
-        .onAppear{
-            Task{
-                await test()
             }
         }
         
