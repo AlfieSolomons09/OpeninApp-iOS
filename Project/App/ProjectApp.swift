@@ -1,10 +1,3 @@
-//
-//  ProjectApp.swift
-//  Project
-//
-//  Created by Chetan Choudhary on 15/04/24.
-//
-
 import SwiftUI
 
 @main

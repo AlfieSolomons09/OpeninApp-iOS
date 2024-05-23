@@ -1,10 +1,3 @@
-//
-//  FAQS.swift
-//  Project
-//
-//  Created by Chetan Choudhary on 16/04/24.
-//
-
 import SwiftUI
 
 struct FAQS: View {

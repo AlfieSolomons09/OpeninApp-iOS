@@ -1,38 +1,23 @@
-//
-//  HomeViewModel.swift
-//  Project
-//
-//  Created by Chetan Choudhary on 17/04/24.
-//
-
 import Foundation
 import Combine
 
 class HomeViewModel: ObservableObject{
-    static let shared = HomeViewModel()
-    @Published var apiResposeData: [ApiResponse] = []
-    @Published var isLoading: Bool = false
+    @Published var APIData: [ApiResponse] = []
+    let apiManager = APIResponseService()
     
-    private let apiNetworkService = APIResponseService()
+    @Published var Data: [Link] = []
     
-    init(){
-        Task{
-            await fetch()
+    func fetchData() {
+        apiManager.fetchData { result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let data):
+                    self.APIData = data
+                    print("OnboardingViewModel:fetchData: Data Fetched - \(data)")
+                case .failure(let error):
+                    print("Error fetching data: \(error)")
+                }
+            }
         }
-    }
-    
-    func fetch() async {
-        await MainActor.run {
-            isLoading = true
-        }
-        
-        
-        async let apiResponseAsync = apiNetworkService.getData()
-        
-        let (data) = await (apiResponseAsync)
-        await MainActor.run(body: {
-            apiResposeData = data
-            isLoading = false
-        })
     }
 }

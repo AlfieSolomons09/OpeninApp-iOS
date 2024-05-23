@@ -1,10 +1,3 @@
-//
-//  Persistence.swift
-//  Project
-//
-//  Created by Chetan Choudhary on 15/04/24.
-//
-
 import CoreData
 
 struct PersistenceController {

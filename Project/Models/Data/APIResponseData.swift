@@ -1,10 +1,3 @@
-//
-//  APIResponseData.swift
-//  Project
-//
-//  Created by Chetan Choudhary on 17/04/24.
-//
-
 import Foundation
 
 
@@ -57,22 +50,18 @@ struct DataObject: Codable {
 }
 
 struct Link: Codable {
-    let app: String
-    let createdAt: String
-    let domainId: String
-    let isFavourite: Int
-    let originalImage: String
-    let smartLink: String
+    let app: String?
+    let created_at: String?
+    let domain_id: String?
+    let is_favourite: Int?
+    let original_image: String?
+    let smart_link: String?
     let thumbnail: String?
-    let timesAgo: String
-    let title: String
-    let totalClicks: Int
-    let urlId: Int
-    let urlPrefix: String?
-    let urlSuffix: String
-    let webLink: String
-    
-    private enum CodingKeys: String, CodingKey {
-        case app, createdAt, domainId, isFavourite = "is_favourite", originalImage = "original_image", smartLink = "smart_link", thumbnail, timesAgo = "times_ago", title, totalClicks = "total_clicks", urlId = "url_id", urlPrefix = "url_prefix", urlSuffix = "url_suffix", webLink = "web_link"
-    }
+    let times_ago: String?
+    let title: String?
+    let total_clicks: Int?
+    let url_id: Int?
+    let url_prefix: String?
+    let url_suffix: String?
+    let web_link: String?
 }

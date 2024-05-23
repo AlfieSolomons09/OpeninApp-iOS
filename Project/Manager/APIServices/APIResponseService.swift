@@ -1,24 +1,34 @@
-//
-//  APIResponseService.swift
-//  Project
-//
-//  Created by Chetan Choudhary on 17/04/24.
-//
 
 import Foundation
 
-class APIResponseService{
-    func getData() async -> [ApiResponse] {
-        let endpoint = Endpoint("" as! EndpointProtocol)
-        do{
-            let response: Response<[ApiResponse]> = try await NetworkUtility.shared.request(endpoint: endpoint)
-            let data = response.data ?? []
-            print("***, Api Data : \(data)")
-            return data
-        } catch (let error) {
-            print(error.localizedDescription)
+class APIResponseService {
+    @Published var total_clicks: Int = 123
+    func fetchData(completion: @escaping (Result<[ApiResponse], Error>) -> Void) {
+        guard let url = URL(string: "https://api.inopenapp.com/api/v1/dashboardNew") else {
+            completion(.failure(NSError(domain: "Invalid URL", code: 0, userInfo: nil)))
+            return
         }
-        
-        return []
+
+        var request = URLRequest(url: url)
+        request.setValue("Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjU5MjcsImlhdCI6MTY3NDU1MDQ1MH0.dCkW0ox8tbjJA2GgUx2UEwNlbTZ7Rr38PVFJevYcXFI", forHTTPHeaderField: "Authorization")
+
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            if let error = error {
+                completion(.failure(error))
+                return
+            }
+
+            guard let data = data else {
+                completion(.failure(NSError(domain: "No data received", code: 1, userInfo: nil)))
+                return
+            }
+
+            do {
+                let data = try JSONSerialization.jsonObject(with: data, options: [])
+                print("JSON Data: \(data)")
+            } catch {
+                completion(.failure(error))
+            }
+        }.resume()
     }
 }
